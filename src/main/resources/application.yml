@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: autorizador
+  security:
+    basic:
+      enabled: false
+  datasource:
+    url: jdbc:h2:mem:autorizador
+    username: user
+    password: 1234
+    driverClassName: org.h2.Driver
+    jpa:
+      spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+  liquibase:
+    change-log: classpath:/db/master.xml
+    default-schema: autorizador
+  jackson:
+    deserialization:
+      accept_empty_string_as_null_object: true
+      fail-on-ignored-properties: false
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 150MB
+  h2:
+    console:
+      enabled: true
+  zipkin:
+    enabled: false
+
+server:
+  port: 8082
+logging:
+  level:
+    br.com.mp.portfolio: WARN
+  file:
+    name: logs/${spring.application.name}.log
+management:
+  health:
+    db:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  security:
+    enabled: false

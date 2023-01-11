@@ -1,0 +1,37 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <property name="smallint" value="int2" dbms="h2,postgresql"/>
+    <property name="int" value="int4" dbms="h2,postgresql"/>
+    <property name="integer" value="int8" dbms="h2,postgresql"/>
+
+    <property name="bigint" value="java.sql.Types.BIGINT" dbms="h2,oracle,postgresql"/>
+
+    <property name="serial" value="serial" dbms="h2,postgresql"/>
+    <property name="bigserial" value="bigserial" dbms="h2,postgresql"/>
+    <property name="smallserial" value="smallserial" dbms="h2,postgresql"/>
+
+    <property name="decimal" value="java.sql.Types.NUMERIC(19,2)" dbms="h2,oracle,postgresql"/>
+    <property name="decimal_4" value="java.sql.Types.NUMERIC(24,4)" dbms="h2,oracle,postgresql"/>
+    <property name="decimal_8" value="java.sql.Types.NUMERIC(24,8)" dbms="h2,oracle,postgresql"/>
+
+    <property name="time" value="java.sql.Types.TIME" dbms="h2,oracle,postgresql"/>
+    <property name="date" value="java.sql.Types.DATE" dbms="h2,oracle,postgresql"/>
+    <property name="datetime" value="java.sql.Types.TIMESTAMP" dbms="h2,oracle,postgresql"/>
+    <property name="now" value="NOW()" dbms="postgresql, h2" />
+    <property name="now" value="SYSDATE" dbms="oracle" />
+
+    <property name="boolean" value="java.sql.Types.BOOLEAN" dbms="h2,oracle,postgresql"/>
+
+    <property name="text" value="clob" dbms="h2,oracle"/>
+    <property name="text" value="oid" dbms="postgresql"/>
+
+    <property name="blob" value="blob" dbms="oracle,h2" />
+    <property name="blob" value="bytea" dbms="postgresql" />
+
+    <includeAll path="changelog/changes" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>
