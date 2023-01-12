@@ -1,6 +1,7 @@
 package br.com.mp.autorizador.controller;
 
 import br.com.mp.autorizador.annotations.ResourceTests;
+import br.com.mp.autorizador.domain.dto.Status;
 import br.com.mp.autorizador.domain.dto.TransacaoDTO;
 import br.com.mp.autorizador.mocks.TransacaoMock;
 import br.com.mp.autorizador.service.TransacaoService;
@@ -32,7 +33,7 @@ class TransacaoControllerTest {
 
     private TransacaoDTO transacaoDTO;
 
-    private static final String apiUrl = "/transacao/";
+    private static final String apiUrl = "/transacoes/";
 
     @BeforeEach
     public void init() {
@@ -41,13 +42,13 @@ class TransacaoControllerTest {
 
     @Test
     public void generateTransactionWithSucess() throws Exception {
-        when(this.transacaoService.generateTransaction(transacaoDTO)).thenReturn(ResponseEntity.ok(anyString()));
+        when(this.transacaoService.generateTransaction(any())).thenReturn(ResponseEntity.accepted().body(Status.OK.name()));
 
         this.mockMvc.perform(post(apiUrl).contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(transacaoDTO))).andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isAccepted());
 
-        verify(this.transacaoService).generateTransaction(transacaoDTO);
+        verify(this.transacaoService).generateTransaction(any());
         verifyNoMoreInteractions(this.transacaoService);
     }
 
