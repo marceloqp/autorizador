@@ -1,6 +1,5 @@
 package br.com.mp.autorizador.controller;
 
-import br.com.mp.autorizador.domain.Cartao;
 import br.com.mp.autorizador.domain.dto.CartaoDTO;
 import br.com.mp.autorizador.service.CartaoService;
 import lombok.AllArgsConstructor;
@@ -17,8 +16,8 @@ public class CartaoController {
     private final CartaoService service;
 
     @GetMapping("/{numeroCartao}")
-    public ResponseEntity<BigDecimal> findByNumeroCartao(@PathVariable("numeroCartao") String numeroCartao) {
-        return ResponseEntity.ok(this.service.findByNumeroCartao(numeroCartao));
+    public ResponseEntity<BigDecimal> findSaldoByNumeroCartao(@PathVariable("numeroCartao") String numeroCartao) {
+        return ResponseEntity.ok(this.service.findSaldoByNumeroCartao(numeroCartao));
     }
 
     @PostMapping

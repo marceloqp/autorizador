@@ -40,12 +40,12 @@ class TransacaoControllerTest {
     }
 
     @Test
-    public void generateTransaction() throws Exception {
+    public void generateTransactionWithSucess() throws Exception {
         when(this.transacaoService.generateTransaction(transacaoDTO)).thenReturn(ResponseEntity.ok(anyString()));
 
         this.mockMvc.perform(post(apiUrl).contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(transacaoDTO))).andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk());
+                .andExpect(status().isAccepted());
 
         verify(this.transacaoService).generateTransaction(transacaoDTO);
         verifyNoMoreInteractions(this.transacaoService);

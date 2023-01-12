@@ -27,7 +27,7 @@ public class CartaoService {
     private BigDecimal saldoInicial;
 
     @Transactional(readOnly = true)
-    public BigDecimal findByNumeroCartao(String numeroCartao) {
+    public BigDecimal findSaldoByNumeroCartao(String numeroCartao) {
 
         return repository
                 .findByNumero(numeroCartao)
