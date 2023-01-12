@@ -3,17 +3,15 @@ package br.com.mp.autorizador.domain;
 import br.com.mp.autorizador.domain.dto.CartaoDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "cartao")
-@Getter
-@Setter
 @ToString
+@Data
+@NoArgsConstructor
 public class Cartao {
 
     @Id
