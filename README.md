@@ -4,8 +4,8 @@
 
 1. Apresente observações/problemas sobre essa solução.
 Comente qual(is) a(s) sua(s) estratégia(s) para melhorar este sistema em termos de qualidade e manutenção. Justifique suas decisões.
-  - Levando em consideração as características aprsentadas posso elencar algumas ações:
-    1. Retirar as lógicas de negócio do controller e colocá-las, de forma mais unitária possível nas classes de serviço;
+  - Levando em consideração as características apresentadas posso elencar algumas ações:
+    1. Retirar as lógicas de negócio do controller e colocá-las, de forma mais unitária possível nas classes de serviço (desacoplar o máximo possível, deixando os métodos o mais desacoplado possivel e com responsabilidades únicas);
     2. Deixar com que validações específficas de domínio(NotNull, tamanho de campos, etc.) sejam tratadas nas classes respectivas utilizando das anotações corretas de validation. Essas validações indiferem do banco utilizado e são melhor para dar manutenção;
     3. Começar gerando testes unitários das novas features e de alterações, e conforme possibilidade ir implementando das demais funcionalidades para diminuir gradativamente esse débito técnico;
 2. Descreva quais são as principais limitações ao se adotar servidores de aplicação em uma arquitetura orientada a microsserviços.
