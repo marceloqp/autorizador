@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 
 @Service
-@Transactional()
+@Transactional
 @AllArgsConstructor
 public class TransacaoService {
 
@@ -26,36 +26,40 @@ public class TransacaoService {
 
         Cartao cartao = validateCard(transacao.getNumeroCartao());
 
-        if(validatePassword(transacao.getSenhaCartao(), cartao.getSenha())){
+        if (validatePassword(transacao.getSenhaCartao(), cartao.getSenha())) {
             return new ResponseEntity<String>(Status.SENHA_INVALIDA.name(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
-        confirmTransaction(transacao.getValor(), cartao.getNumero());
+        BigDecimal saldo = cartaoRepository.getSaldoByNumero(cartao.getNumero());
+
+        if(validateBalance(transacao.getValor(), saldo)){
+            updateBalance(saldo.subtract(transacao.getValor()));
+        }
 
         return new ResponseEntity<String>(Status.OK.name(), HttpStatus.CREATED);
+
+
     }
 
     @Transactional
-    private void confirmTransaction(BigDecimal transacao, String cartao) {
-        try{
-            cartaoRepository.updateSaldo(generateBalance(transacao, cartao));
-        } catch (ConstraintViolationException ex){
+    private void updateBalance(BigDecimal saldo) {
+        try {
+            cartaoRepository.updateSaldo(saldo);
+        } catch (ConstraintViolationException ex) {
             throw new GenericRestException(HttpStatus.UNPROCESSABLE_ENTITY, Status.SALDO_INSUFICIENTE.name());
         }
     }
 
-    @Transactional
-    private BigDecimal generateBalance(BigDecimal transacao, String cartao) {
 
-        BigDecimal saldo = cartaoRepository.getSaldoByNumero(cartao);
-        return saldo.compareTo(transacao) > 0 ? saldo.subtract(transacao) : saldo;
+    private boolean validateBalance(BigDecimal transacao, BigDecimal saldo) {
+        return saldo.compareTo(transacao) > 0;
     }
 
     private boolean validatePassword(String senhaTransacao, String senhaCartao) {
         return StringUtils.equals(senhaTransacao, senhaCartao);
     }
 
-    private Cartao validateCard(String numeroCartao){
+    private Cartao validateCard(String numeroCartao) {
         return cartaoRepository
                 .findByNumero(numeroCartao)
                 .orElseThrow(() -> new GenericRestException(
