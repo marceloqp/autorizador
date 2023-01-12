@@ -4,8 +4,6 @@ import br.com.mp.autorizador.domain.Cartao;
 import br.com.mp.autorizador.domain.dto.CartaoDTO;
 import br.com.mp.autorizador.exception.CartaoNaoEncontradoException;
 import br.com.mp.autorizador.repository.CartaoRepository;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -55,6 +53,6 @@ public class CartaoService {
         Cartao cartao = new Cartao(cartaoDTO);
         cartao.setSaldo(saldoInicial);
         repository.save(cartao);
-       return new ResponseEntity<CartaoDTO>(mapToResponse(cartao), HttpStatus.ACCEPTED);
+       return new ResponseEntity<CartaoDTO>(mapToResponse(cartao), HttpStatus.CREATED);
     }
 }

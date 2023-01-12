@@ -2,6 +2,7 @@ package br.com.mp.autorizador.domain;
 
 import br.com.mp.autorizador.domain.dto.CartaoDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -27,6 +28,7 @@ public class Cartao {
     private String senha;
 
     @Column
+    @Positive
     private BigDecimal saldo;
 
     public Cartao(CartaoDTO cartaoDTO) {

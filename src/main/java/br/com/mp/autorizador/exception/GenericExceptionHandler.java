@@ -35,4 +35,18 @@ public class GenericExceptionHandler extends ResponseEntityExceptionHandler {
                         Arrays.toString(getRootCauseStackTrace(ex))));
     }
 
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Object> handleValidationExceptions(ConstraintViolationException ex) {
+        log.error("Erro na requisição. Message: " + StringUtils.stripToEmpty(ex.getMessage()), ex);
+
+        Set<String> errors = new HashSet<>();
+        ex.getConstraintViolations().forEach(error -> {
+            String errorMessage = error.getMessage();
+            errors.add(errorMessage);
+        });
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .body(new DetalhesErro(HttpStatus.UNPROCESSABLE_ENTITY,
+                        errors.toString().replaceAll("[\\[\\]]", "")));
+    }
+
 }
