@@ -52,7 +52,7 @@ public class TransacaoService {
 
 
     private boolean validateBalance(BigDecimal transacao, BigDecimal saldo) {
-        return saldo.compareTo(transacao) > 0;
+        return saldo.compareTo(transacao) >= 0;
     }
 
     private boolean validatePassword(String senhaTransacao, String senhaCartao) {
