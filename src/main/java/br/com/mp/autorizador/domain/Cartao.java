@@ -1,8 +1,8 @@
 package br.com.mp.autorizador.domain;
 
 import br.com.mp.autorizador.domain.dto.CartaoDTO;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Positive;
+import javax.persistence.*;
+import javax.validation.constraints.Positive;
 import lombok.*;
 
 import java.math.BigDecimal;

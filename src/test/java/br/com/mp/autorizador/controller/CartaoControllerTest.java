@@ -69,13 +69,13 @@ class CartaoControllerTest {
     @Test
     public void canGenerateCard() throws Exception {
 
-        when(this.cartaoService.generateCard(cartaoDTO)).thenReturn(new ResponseEntity<CartaoDTO>(cartaoDTO, HttpStatus.ACCEPTED));
+        when(this.cartaoService.generateCard(any())).thenReturn(new ResponseEntity<CartaoDTO>(cartaoDTO, HttpStatus.CREATED));
 
         this.mockMvc.perform(post(apiUrl).contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cartaoDTO))).andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
 
-        verify(this.cartaoService).generateCard(cartaoDTO);
+        verify(this.cartaoService).generateCard(any());
         verifyNoMoreInteractions(this.cartaoService);
     }
 

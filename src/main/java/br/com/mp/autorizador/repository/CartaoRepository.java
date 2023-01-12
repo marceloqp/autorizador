@@ -1,7 +1,7 @@
 package br.com.mp.autorizador.repository;
 
 import br.com.mp.autorizador.domain.Cartao;
-import jakarta.persistence.LockModeType;
+import javax.persistence.LockModeType;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

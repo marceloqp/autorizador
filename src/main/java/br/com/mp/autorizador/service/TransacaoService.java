@@ -5,7 +5,7 @@ import br.com.mp.autorizador.domain.dto.Status;
 import br.com.mp.autorizador.domain.dto.TransacaoDTO;
 import br.com.mp.autorizador.exception.GenericRestException;
 import br.com.mp.autorizador.repository.CartaoRepository;
-import jakarta.validation.ConstraintViolationException;
+import javax.validation.ConstraintViolationException;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
