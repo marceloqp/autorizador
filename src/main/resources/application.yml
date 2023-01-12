@@ -2,6 +2,7 @@ spring:
   application:
     name: autorizador
   security:
+    ignored: /**
     basic:
       enabled: false
   datasource:
@@ -49,3 +50,5 @@ management:
       show-details: always
   security:
     enabled: false
+cartao:
+  saldo-inicial: ${SALDOINICIAL:500}

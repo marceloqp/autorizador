@@ -21,9 +21,9 @@ import static org.apache.commons.lang3.exception.ExceptionUtils.getRootCauseStac
 public class GenericExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({GenericRestException.class})
-    public ResponseEntity<Object> handleOxyExcpetion(GenericRestException ex, WebRequest request) {
+    public ResponseEntity<Object> handleExcpetion(GenericRestException ex, WebRequest request) {
         log.info("Problema na requisição. Message: " + StringUtils.stripToEmpty(ex.getMessage()), ex);
-        return ResponseEntity.status(ex.getHttpStatus()).body(ex.getDetalhesErro());
+        return ResponseEntity.status(ex.getHttpStatus()).body(ex.getMensagem());
     }
 
     @ExceptionHandler({Exception.class})
@@ -33,20 +33,6 @@ public class GenericExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new DetalhesErro(HttpStatus.INTERNAL_SERVER_ERROR,
                         Arrays.toString(getRootCauseStackTrace(ex))));
-    }
-
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<Object> handleValidationExceptions(ConstraintViolationException ex) {
-        log.error("Erro na requisição. Message: " + StringUtils.stripToEmpty(ex.getMessage()), ex);
-
-        Set<String> errors = new HashSet<>();
-        ex.getConstraintViolations().forEach(error -> {
-            String errorMessage = error.getMessage();
-            errors.add(errorMessage);
-        });
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new DetalhesErro(HttpStatus.INTERNAL_SERVER_ERROR,
-                        errors.toString().replaceAll("[\\[\\]]", "")));
     }
 
 }

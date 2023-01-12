@@ -1,6 +1,6 @@
 package br.com.mp.autorizador.domain;
 
-import br.com.mp.autorizador.domain.dto.CartaoResponseDTO;
+import br.com.mp.autorizador.domain.dto.CartaoDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,8 +29,13 @@ public class Cartao {
     @Column
     private BigDecimal saldo;
 
-    public static CartaoResponseDTO mapToResponse(Cartao cartao) {
-        return CartaoResponseDTO
+    public Cartao(CartaoDTO cartaoDTO) {
+        this.setNumero(cartaoDTO.getNumeroCartao());
+        this.setSenha(cartaoDTO.getSenha());
+    }
+
+    public static CartaoDTO mapToResponse(Cartao cartao) {
+        return CartaoDTO
                 .builder()
                 .senha(cartao.getSenha())
                 .numeroCartao(cartao.getNumero())

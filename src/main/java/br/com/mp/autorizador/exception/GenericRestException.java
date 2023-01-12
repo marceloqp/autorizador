@@ -7,12 +7,12 @@ import org.springframework.http.HttpStatus;
 public class GenericRestException extends RuntimeException {
 
     private final HttpStatus httpStatus;
-    private final DetalhesErro detalhesErro;
+    private final String mensagem;
 
     public GenericRestException(final HttpStatus httpStatus, final String mensagemErro) {
         super(mensagemErro);
         this.httpStatus = httpStatus;
-        detalhesErro = new DetalhesErro(httpStatus, mensagemErro);
+        this.mensagem = mensagemErro;
     }
 
 }
